@@ -1,4 +1,4 @@
-print("")
+print("a - First element, b - second element, c - third element")
 
 a = float (input("enter a (a can't be 0): "))
 b = float (input("enter b : "))
