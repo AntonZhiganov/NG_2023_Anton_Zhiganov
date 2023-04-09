@@ -1,11 +1,24 @@
 import json
      
 def save_library (library) :
+
+    """
     
+    Save book in library
+    
+    """
+
     with open ('library.txt', 'w') as f :
         json.dump(library, f)
 
 def delete_Book (library) :
+    
+    """
+    
+    Delete book from library
+    
+    """
+    
     name = input("Enter the name of the book you want to delete : ")
     name = name
     
@@ -19,6 +32,12 @@ def delete_Book (library) :
         print("The book was not deleted because it was not found!")
     
 def add_Book(library) :
+    
+    """
+    
+    Add book in library
+    
+    """
 
     while True :
 
@@ -57,7 +76,13 @@ def add_Book(library) :
                 continue
                 
 def lookToBook(library) :
+
+    """
     
+    View all books added by the user
+    
+    """
+
     if not library :
         print("Library not found! First add a book!!")
         
@@ -68,6 +93,12 @@ def lookToBook(library) :
             print(f"{key} : {book}")
                 
 def edit_Book(library) :
+    
+    """
+    
+    Change any Parameter in any workbook
+    
+    """
     
     if not library :
         print("Library not found! First add a book!!")
@@ -102,6 +133,9 @@ except FileNotFoundError :
     library = {}
 
 while True :
+    
+    #Menu
+    
     menu = input("Enter 1 to add a book, 2 to delete a book, 3 to save and exit, 4 to wiev your books, 5 to edit book information : ")
     
     if menu == "1" :
