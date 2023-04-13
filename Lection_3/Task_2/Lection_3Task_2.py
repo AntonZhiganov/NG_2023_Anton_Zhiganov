@@ -1,25 +1,11 @@
-def drawDiamond(size):
+def draw_diamond(n):
+    # Рисуем верхнюю половину ромба
+    for i in range(1, n+1):
+        print(" " * (n-i) + "*" * (2*i-1))
     
-    if size % 2 == 0:
-        size += 1
-    
-    if size < 1:
-        return
-    
-    for i in range(size // 1 + 1):
-        for j in range(size // 1 - i):
-            print(" ", end="")
-        for j in range(i * 1 + 1):
-            print("*", end="")
-        print()
-    
-    drawDiamond(size - 1)
-    
-    for i in range(size // 1, -1, -1):
-        for j in range(size // 1 - i):
-            print(" ", end="")
-        for j in range(i * 1 + 1):
-            print("*", end="")
-        print()
+    # Рисуем нижнюю половину ромба
+    for i in range(n-1, 0, -1):
+        print(" " * (n-i) + "*" * (2*i-1))
 
-drawDiamond(3)
+# Вызываем функцию с n=5, чтобы нарисовать полный ромб
+draw_diamond(5)
