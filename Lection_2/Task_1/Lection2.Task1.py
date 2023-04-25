@@ -1,3 +1,4 @@
+
 quantity = input("Enter Quantity elements: ")  #The user enters the length of the list
 elements = input("Enter" + " " + str(quantity) + " " + "elements: ") #User enters list items
 
@@ -7,13 +8,13 @@ dictionary = {} #Announce dictionary
 
 #Checking the number of repetitions
 
-for i in range(len(my_list)):
-    for j in range(i + 1, len(my_list)):
-        if my_list[i] == my_list[j]:
-             if my_list[i] not in dictionary:
-                 dictionary[my_list[i]] = 2
+for repeat1 in range(len(my_list)):
+    for repeat2 in range(repeat1 + 1, len(my_list)):
+        if my_list[repeat1] == my_list[repeat2]:
+             if my_list[repeat1] not in dictionary:
+                 dictionary[my_list[repeat1]] = 2
              else:
-                  dictionary[my_list[i]] += 1
+                  dictionary[my_list[repeat1]] += 1
                   
 #output the number of repetitions for each element that is repeated
                   
