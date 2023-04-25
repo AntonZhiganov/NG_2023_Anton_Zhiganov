@@ -1,3 +1,4 @@
+
 quantity = input("Enter Quantity elements: ")  #The user enters the length of the list
 elements = input("Enter" + " " + str(quantity) + " " + "elements: ") #User enters list items
 
