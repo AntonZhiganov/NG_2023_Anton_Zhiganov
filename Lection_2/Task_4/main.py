@@ -1,22 +1,25 @@
 import json
      
-def save_library (library) :  
+def save_library (library) :                   # Save user books in library
     with open ('library.txt', 'w') as f :
         json.dump(library, f)
 
-def delete_Book (library) :
+def delete_Book (library) :                                            # Delete user books from library
     name = input("Enter the name of the book you want to delete : ")
     name = name
-    if name in library :
+    if name in library :                                              # Check if there is a book with the same name
         del library[name]
         print("The book has been delete!")
         save_library(library)
     else :
         print("The book was not deleted because it was not found!")
+
+# In the next part of the code, we ask the user for the value of the key, 
+# and also for the entire value of the key, and save the workbook to a word.
     
-def add_Book(library) :
+def add_Book(library) :                                                # Add user books in library
     while True :
-        key = input("Enter the name of the book you want to add : ")
+        key = input("Enter the name of the book you want to add : ")     
         nested_dic = {}
         name = input("Enter book title : ")
         author = input("Enter the author's full name : ")
@@ -40,7 +43,7 @@ def add_Book(library) :
                 print("Enter yes or no!")
                 continue
                 
-def lookToBook(library) :
+def lookToBook(library) :                           # Looking for a book in the user's library
     if not library :
         print("Library not found! First add a book!!")
     else :
@@ -48,12 +51,12 @@ def lookToBook(library) :
         for key, book in library.items() :
             print(f"{key} : {book}")
                 
-def edit_Book(library) :
+def edit_Book(library) :                                       # Edit a book in user's library
     if not library :
         print("Library not found! First add a book!!")
     else :
-        name = input("Enter the title of the book you want to edit : ")
-        if name in library :
+        name = input("Enter the title of the book you want to edit : ")      # We ask the user which of
+        if name in library :                                                 # his books he wants to edit
             book = library[name]
             print(f"Current details for {name}: {book}")
             field = input("What value do you want to edit? (title, author, pages, genre, cover):")
@@ -67,14 +70,15 @@ def edit_Book(library) :
                 print(f"{field} is not to valid field for {name}")
         else :
             print(f"{name} is not faund in the library")
-                
-try:
-    with open('library.txt', 'r') as f :
+try:                                                  # Avoiding Mistakes
+    with open('library.txt', 'r') as f :            
         library = json.load(f)
 except FileNotFoundError :
     library = {}
-while True :
-    menu = input("Enter 1 to add a book, 2 to delete a book, 3 to save and exit, 4 to wiev your books, 5 to edit book information : ")
+    
+while True :                                   # Menu
+    menu = input("Enter 1 to add a book, 2 to delete a book, 3 to save and exit, \
+                 4 to wiev your books, 5 to edit book information : ")
     if menu == "1" :
         add_Book(library)
     elif menu == "2" :
