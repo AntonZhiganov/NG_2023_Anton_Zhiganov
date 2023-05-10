@@ -23,7 +23,7 @@ elif action == 3 :
 elif action == 4 :
     print("result of division: " + (str(firstNum / secondNum)))
 elif action == 5 :
-    print("result of exponentiation: " + (str(firstNum ** secondNum)))
+    print("result of exponentiation: " + (str(math.pow(firstNum, secondNum))))
 elif action == 6 :
     print("What number do you want to extract the square root of? ")
     print("Enter 1 if you want to take the square root of first number ")
@@ -32,9 +32,9 @@ elif action == 6 :
     choice = int (input("Do you want to take the square root of first number or secons number?: "))
 
     if choice == 1 :
-        print("The result of extracting the root from the number" + (str(firstNum)) + "is: " + (str(firstNum ** (0.5))))
+        print("The result of extracting the root from the number" + (str(firstNum)) + "is: " + (str(math.sqrt(firstNum))))
     if choice == 2 :
-        print("The result of extracting the root from the number" + (str(secondNum)) + "is: " + (str(secondNum ** (0.5))))
+        print("The result of extracting the root from the number" + (str(secondNum)) + "is: " + (str(math.sqrt(secondNum))))
         
 else :
     print ("Enter numbers from 1 to 6!")
