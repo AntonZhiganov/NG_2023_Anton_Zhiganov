@@ -14,27 +14,29 @@ action = int (input("What do you want to do with numbers: " ))
 
 print("===========================================")  
 
-if action == 1 :                                          #The program reads the user's choice, 
-    print("result of addition: " + (str(firstNum + secondNum)))          #If the user enters a different number, then we inform him about it.
-elif action == 2 :
-    print("subtraction result: " + (str(firstNum - secondNum)))
-elif action == 3 :
-    print("result of multiplication: " + (str(firstNum * secondNum)))
-elif action == 4 :
-    print("result of division: " + (str(firstNum / secondNum)))
-elif action == 5 :
-    print("result of exponentiation: " + (str(math.pow(firstNum, secondNum))))
-elif action == 6 :
-    print("What number do you want to extract the square root of? ")
-    print("Enter 1 if you want to take the square root of first number ")
-    print("Enter 2 if you want to take the square root of second number ")
+result = match action : 
+case 1 :                                          #The program reads the user's choice, 
+    "result of addition: " + (str(firstNum + secondNum))          #If the user enters a different number, then we inform him about it.
+case 2 :
+    "subtraction result: " + (str(firstNum - secondNum))
+case 3 :
+    "result of multiplication: " + (str(firstNum * secondNum))
+case 4 :
+    "result of division: " + (str(firstNum / secondNum))
+case 5 :
+    "result of exponentiation: " + (str(math.pow(firstNum, secondNum)))
+case 6 :
+    "What number do you want to extract the square root of? "
+    "Enter 1 if you want to take the square root of first number "
+    "Enter 2 if you want to take the square root of second number "
     
     choice = int (input("Do you want to take the square root of first number or secons number?: "))
 
-    if choice == 1 :
-        print("The result of extracting the root from the number" + (str(firstNum)) + "is: " + (str(math.sqrt(firstNum))))
-    if choice == 2 :
-        print("The result of extracting the root from the number" + (str(secondNum)) + "is: " + (str(math.sqrt(secondNum))))
+root = match choice :
+    case 1 :
+        "The result of extracting the root from the number" + (str(firstNum)) + "is: " + (str(math.sqrt(firstNum)))
+    case 2 :
+        "The result of extracting the root from the number" + (str(secondNum)) + "is: " + (str(math.sqrt(secondNum)))
         
-else :
-    print ("Enter numbers from 1 to 6!")
+case _ :
+    "Enter numbers from 1 to 6!"

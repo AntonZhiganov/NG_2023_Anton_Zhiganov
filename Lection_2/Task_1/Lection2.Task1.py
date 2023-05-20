@@ -1,22 +1,19 @@
 
-quantity = input("Enter Quantity elements: ")  #The user enters the length of the list
-elements = input("Enter" + " " + str(quantity) + " " + "elements: ") #User enters list items
+quantity = int(input("Enter Quantity elements: "))  # The user enters the length of the list
+elements = input(f"Enter {quantity} elements: ")  # User enters list items
 
-my_list = elements.split() #With variable elements we make a list
+my_list = elements.split()  # Convert input to list
 
-dictionary = {} #Announce dictionary
+dictionary = {}  # Initialize dictionary
 
-#Checking the number of repetitions
+# Count repetitions
+for element in my_list:
+    if element not in dictionary:
+        dictionary[element] = 1
+    else:
+        dictionary[element] += 1
 
-for repeat1 in range(len(my_list)):
-    for repeat2 in range(repeat1 + 1, len(my_list)):
-        if my_list[repeat1] == my_list[repeat2]:
-             if my_list[repeat1] not in dictionary:
-                 dictionary[my_list[repeat1]] = 2
-             else:
-                  dictionary[my_list[repeat1]] += 1
-                  
-#output the number of repetitions for each element that is repeated
-                  
+# Output the number of repetitions for each element that is repeated
 for key, value in dictionary.items():
-    print(f"{key} repeats {value} time(s)")
+    if value > 1:
+        print(f"{key} repeats {value} time(s)")
