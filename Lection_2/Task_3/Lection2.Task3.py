@@ -1,25 +1,15 @@
-my_Flo = []
-my_Int = []
-my_Str = []
+num_lists = int(input("Enter the number of lists: "))     # User enter the number of lists
 
-while True :
-    myFloList = input("Enter float elements, enter 'stop' to exit :")
-    if myFloList.lower() == "stop" :
-        break
-    my_Flo.append(float(myFloList))
-    
-while True :
-    myIntList = input("Enter int elements, enter 'stop' to exit :")
-    if myIntList.lower() == "stop" :
-        break
-    my_Int.append(int(myIntList))
-            
-while True :
-    myStrList = input("Enter str elements, enter 'stop' to exit :")
-    if myStrList.lower() == "stop" :
-        break
-    my_Str.append(str(myStrList))
-    
-    print(list(set(my_Flo)))
-    print(list(set(my_Int)))
-    print(list(set(my_Str)))
+lists = [[] for _ in range(num_lists)]                    # Create a list with lists
+
+# For each list, the user enters elements until he enters stop
+
+for number in range(num_lists):
+    while True:
+        user_input = input(f"Enter elements for list {number+1}, enter 'stop' to exit: ") 
+        if user_input.lower() == "stop":
+            break
+        lists[number].append(user_input)
+
+for lst in lists:
+    print(list(set(lst)))     #Show lists
