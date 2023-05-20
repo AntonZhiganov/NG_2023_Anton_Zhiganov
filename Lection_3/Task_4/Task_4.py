@@ -1,6 +1,6 @@
 import requests
 
-def mailServer (urls):
+def mailServer (urls):        
     results = []
     
     for url in urls:
@@ -16,10 +16,4 @@ urls = [ "https://2ch.hk" ]
 
 results = mailServer(urls)
 
-print(results)
-
-    
-    
-    
-    
-    
+print(results)       # Enter result  
