@@ -1,11 +1,12 @@
 import math
 
+x = float(input("Enter first number: "))
+y = float(input("Enter second number: "))
+
 def addition() :
     """
     Adding two numbers entered by the user
     """ 
-    x = float(input("Enter first number: "))
-    y = float(input("Enter second number: "))
     print(float(x + y))
 
 def subtraction() :
@@ -13,24 +14,18 @@ def subtraction() :
     Subtraction of two numbers entered by the user
     """
     print("The second is subtracted from the first!")
-    x = float(input("Enter first number: "))
-    y = float(input("Enter second number: "))
     print(float(x - y))
-    
+
 def multiplication() :
     """
     Multiplication of two numbers entered by the user
     """
-    x = float(input("Enter first number: "))
-    y = float(input("Enter second number: "))
     print(float(x * y))
 
 def division() :
     """
     Division of two numbers entered by the user
     """
-    x = float(input("Enter first number: "))
-    y = float(input("Enter second number: "))
     if y == 0 :
         print("Can't divide by 0!")
     else :
@@ -42,24 +37,20 @@ def exponentiation() :
     Raising a number to a power
     """
     print("The first value is raised to the power of the second value!")
-    x = float(input("Enter first number: "))
-    y = float(input("Enter second number: "))
     print(float(x ** y))
 
 def squareNumber () :
     """
     Squaring a number
     """
-    x = float(input("Enter the number you want to square: "))
-    print(float(x ** 2)) 
+    print(float(x ** 2))
 
 def squareRoot() :
     """
     The square root of the number entered by the user
     """
-    x = float(input("Enter the number you want to take the square root of: "))
     if x < 0 :
-        print("The number must not be negative!")  
+        print("The number must not be negative!")
     else :
         print(float(x ** 0.5))
 
@@ -87,6 +78,7 @@ while True :
     elif menu == "7" :
         squareRoot()
     else :
-        print("You entered an invalid number, please enter 1, 2, 3, 4, 5, 6 or 7! ")
         
+        print("You entered an invalid number, please enter 1, 2, 3, 4, 5, 6, or 7!")
         
+    break
