@@ -16,7 +16,7 @@ def register ():
         else:
              return 'Passwords do not match'
          
-    return ('/SingIn.HTML')
-
+    return render_template ('/SingIn.HTML')
+        
 if __name__ == '__main__' :
     app.run(host = '0.0.0.0', port = 5000)
