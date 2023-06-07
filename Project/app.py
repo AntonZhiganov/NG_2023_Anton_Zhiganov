@@ -36,6 +36,14 @@ def index ():
     data = "Encrypted data"
     encrypted_data = encrypt_data(data)
     return render_template("index.html", encrypted_data = encrypted_data)
+    
+# Registration pagr route
+@app.route('/registr')
+
+def registration ():
+    data = "Encrypted data"
+    encrypted_data = encrypt_data(data)
+    return render_template("newUser.html", encrypted_data = encrypted_data)
 
 # Start server
 if __name__ == '__main__':

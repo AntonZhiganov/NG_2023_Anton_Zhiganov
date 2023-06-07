@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/newUser.css')}}">
+    <title>Registration</title>
+
+</head>
+<body>
+
+    <h1>Please register</h1>
+    <form method = "POST" action = "/registr"
+        <div class="ReFild">
+
+            <label for = "username">Username:</label>
+            <input type = "text" id = "username" name = "username" placeholder = "Enter you username">
+
+            <label for = "password1">Password:</label>
+            <input type = "password" id = "password1" name = "password1" placeholder = "Enter you password">
+
+            <label for = "password2">Repeat password:</label>
+            <input type = "password" id = "password2" name = "password2" placeholder = "Repeat you password">
+
+        </div>
+        <input type = "submit" value = "register">
+    </form>
+    <h2>User information</h2>
+        <div class="mainPage">
+            <p>
+                At this stage of site development, the user will not 
+                be able to restore his account if necessary, since he 
+                has not yet been linked to an email or phone number.
+                Please be careful and don't forget your passwords:)
+            </p>
+            <img src = "https://memepedia.ru/wp-content/uploads/2018/02/n08A8NO-1.jpg" alt = "Remember your password" />
+            <div class="downimg">
+            <p>Don't forget your password</p>
+            </div>
+        </div>
+    <div class="links">
+        <p>
+
+            <a href="#">Log in</a>
+            <a href="#">Chats</a>
+            <a href="/main">Information</a>
+
+        </p>
+    </div>
+</body>
+</html>
