@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
+    <title>login</title>
+</head>
+<body>
+    <div class = "content">
+        <h1>Please login to your account</h1>
+
+        <form method = "POST" action = "/login"
+            <div class="ReFild">
+
+                <label for = "username">Username:</label>
+                <input type = "text" id = "username" name = "username" placeholder = "Enter you username">
+
+                <label for = "password1">Password:</label>
+                <input type = "password" id = "password" name = "password" placeholder = "Enter you password">
+
+            </div>
+            <input type = "submit" value = "login">
+        </form>
+    </div>
+    <div class="mainPage">
+        
+        <p>If you forgot your password or login, </p>
+        <p>your account cannot be restored </p>
+        <p>(Perhaps in the future we will fix this) </p>
+
+    <div class="links">
+        <p>
+
+            <a href="/registr">Register</a>
+            <a href="/chats">Chats</a>
+            <a href="/main">Information</a>
+
+        </p>
+    </div>
+</body>
+</html>
