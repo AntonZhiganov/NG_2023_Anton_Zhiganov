@@ -10,17 +10,35 @@
 
         <h1>Chat list</h1>
         <div class = "chatContainer">
-            <lu class = "chat-list">
+
+            <ul class = "chat-list">
 
                 {% for chat in chats [::-1] %}
-                <li class = "chat">{{ chat.name }}</li>
-                {% endfor %}
+                <li class = "chat">
 
-            </lu>
+                    <div class = "chat-info">
+
+                        <h3><a href = "{{ url_for('open_chat', chat_id = chat.id) }}">{{ chat.name }}</a></h3>
+                        {% if current_user.id == chat.owner_id or current_user.is_admin %}
+                        <form action="{{ url_for('delete_chat', chat_id=chat.id) }}" method="POST" class="delete-form">
+
+                            <button type = "submit", class = "btn btn-danger">Delete</button>
+
+                        </form>
+                        {% endif %}
+                        
+                    </div>
+
+                </li>
+                {%endfor%}
+
+            </ul>
             
         </div>
         <div class="BoxButPlus">
+
             <button id = "addChatButt" onclick = "showChatForm()">+</button>
+
         </div>
         <div id = "chatForm" class = "hidden">
 
@@ -31,6 +49,7 @@
                 <input type = "checkBox" id = "SecretCheckBox" name = "Secret">
                 <input type = "text" id = "secretInput" name = "secretInput" placeholder = "Enter secret" class = "hidden">
                 <button type = "submit">Create Chat</button>
+
             </form>
 
         </div>
@@ -43,16 +62,6 @@
 
             </p>
         </div>
-        {% for chat in chats %}
-            <li class="chat">
-                {{ chat.name }}
-                {% if current_user.id == chat.owner_id or current_user.is_admin %}
-                    <form action="{{ url_for('delete_chat', chat_id=chat.id) }}" method="POST" class="delete-form">
-                        <button type="submit">Delete</button>
-                    </form>
-                {% endif %}
-            </li>
-        {% endfor %}
         <script>
 
             function showChatForm() {

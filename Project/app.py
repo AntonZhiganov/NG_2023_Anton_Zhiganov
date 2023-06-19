@@ -20,6 +20,7 @@ class User(db.Model):
     
     # Add is_active attribute
     is_active  = db.Column(db.Boolean, default = True)
+    is_admin = db.Column(db.Boolean, default = True)
  
     def is_authenticated(self):
         return True
@@ -155,7 +156,19 @@ def delete_chat(chat_id):
 
     return redirect(url_for('chats'))
         
-                     
+@app.route ('/chat/<int:chat_id>', methods = ['GET', 'POST'])
+@login_required
+def open_chat(chat_id):
+    chat = Chat.query.get_or_404(chat_id)
+    if request.method == 'POST':
+        content = request.form.get('content')
+        if content:
+            message = Message(content = content, chat_id = chat_id)
+            db.session.add(message)
+            db.session.commit()
+    messages = Message.query.filter_by(chat_id = chat_id).all()
+    return render_template('chat.html', chat = chat, messages = messages)
+        
 # Start server
 if __name__ == '__main__':
     with app.app_context():
