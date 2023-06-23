@@ -46,7 +46,7 @@
 
                 <input type = "text" name = "chat_name" placeholder = "Enter chat name" required>
                 <label for = "SecretCheckBox">Secret</label>
-                <input type = "checkBox" id = "SecretCheckBox" name = "Secret">
+                <input type = "text" id = "secret" name = "secret">
                 <input type = "text" id = "secretInput" name = "secretInput" placeholder = "Enter secret" class = "hidden">
                 <button type = "submit">Create Chat</button>
 
@@ -59,6 +59,7 @@
                 <a href="/registr">Register</a>
                 <a href="/login">Login</a>
                 <a href="/">Information</a>
+                <a href="{{ url_for('logout') }}">logout</a>
 
             </p>
         </div>
