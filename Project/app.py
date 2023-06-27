@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, request, flash, redirect, ses
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 import hashlib
-from flask_socketio import SocketIO, join_room, leave_room, emit
+from flask_socketio import SocketIO, leave_room, emit
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -166,37 +166,29 @@ def delete_chat(chat_id):
     return redirect(url_for('chats'))
         
 # Open chat
-@app.route ('/chat/<int:chat_id>', methods = ['GET', 'POST'])
+@app.route('/chat/<int:chat_id>', methods=['GET', 'POST'])
 @login_required
 def open_chat(chat_id):
     chat = Chat.query.get_or_404(chat_id)
-    if chat.secret:
-        if not chat.secret_entered:
-            return redirect(url_for('chat_secret', chat_id = chat.id))
-        else:
-            if request.method == 'POST':
-                content = request.form.get('content')
-                if content:
-                    message = Message(content = content, chat_id = chat_id)
-                    db.session.add(message)
-                    db.session.commit()
-                    socketio.emit('new_message',{'content': content}, room = chat_id)
-                return redirect(url_for('open_chat', chat_id = chat.id))
-            else:
-                messages = Message.query.filter_by(chat_id = chat_id).all()
-                return render_template('chat.html', chat = chat, messages = messages)       
+    secret_entered = session.get(f'secret_entered_{chat_id}_{current_user.id}', False)
+    if chat.secret and not secret_entered:
+        return redirect(url_for('chat_secret', chat_id=chat.id))
+    if request.method == 'POST':
+        content = request.form.get('content')
+        if content:
+            if not secret_entered:
+                content = hashlib.md5(content.encode()).hexdigest()
+            message = Message(content=content, chat_id=chat_id)
+            db.session.add(message)
+            db.session.commit()
+            socketio.emit('new_message', {'content': content}, room=chat_id)
+        return redirect(url_for('open_chat', chat_id=chat.id))
     else:
-        if request.method == 'POST':
-            content = request.form.get('content')
-            if content:
-                message = Message(content = content, chat_id = chat_id)
-                db.session.add(message)
-                db.session.commit()
-                socketio.emit('new_message',{'content': content}, room = chat_id)
-            return redirect(url_for('open_chat', chat_id = chat.id))
-        else:
-            messages = Message.query.filter_by(chat_id = chat_id).all()
-            return render_template('chat.html', chat = chat, messages = messages)
+        messages = Message.query.filter_by(chat_id=chat_id).all()
+        if not secret_entered:
+            for message in messages:
+                message.content = hashlib.md5(message.content.encode()).hexdigest()
+        return render_template('chat.html', chat=chat, messages=messages)
  
 # User authorization in the chat
 def login_user_chat(chat):
@@ -210,24 +202,14 @@ def login_user_chat(chat):
 # Chat secret
 @app.route('/chat/<int:chat_id>/secret', methods=['GET', 'POST'])
 @login_required
-def chat_secret (chat_id):
+def chat_secret(chat_id):
     chat = Chat.query.get_or_404(chat_id)
     if request.method == 'POST':
         secret = request.form.get('secret')
         if secret == chat.secret:
-            chat.secret_entered = True
-            db.session.commit()
-            return redirect(url_for('open_chat', chat_id = chat.id))
-        else:
-            flash('Wront secret', 'error')
+            session[f'secret_entered_{chat_id}_{current_user.id}'] = True
+            return redirect(url_for('open_chat', chat_id=chat.id))
     return render_template('chat_secret.html', chat=chat)
-
-# join user in chat
-@socketio.on('join')
-def on_join(data):
-    chat_id = data['chat_id']         
-    join_room(chat_id)
-    emit('status', {'msg': 'You have entered the chat'}, room=chat_id) 
     
 # Leave user from chat
 @socketio.on('leave')
@@ -247,4 +229,4 @@ def logout():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    socketio.run(app, debug = True)
+    socketio.run(app, host='0.0.0.0', port=80, debug = True)
